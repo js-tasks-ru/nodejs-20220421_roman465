@@ -38,6 +38,7 @@ server.on('request', (req, res) => {
         });
         const limitStream = new LimitSizeStream({limit: limitSize});
         limitStream.on('error', (error) => {
+          stream.destroy();
           if (error.code === 'LIMIT_EXCEEDED') {
             fs.rm(filepath, (error) => {
               if (error) {
