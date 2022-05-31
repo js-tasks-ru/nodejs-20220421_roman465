@@ -115,11 +115,7 @@ describe('email/registration', () => {
         await u.save();
 
         const response = await request({
-          method: 'post',
-          url: 'http://localhost:3000/api/confirm',
-          data: {
-            verificationToken: newUserData.verificationToken,
-          },
+          url: `http://localhost:3000/api/confirm/${newUserData.verificationToken}`,
         });
 
         const user = await User.findOne({email: newUserData.email});
@@ -132,11 +128,7 @@ describe('email/registration', () => {
 
     it('при запросе /confirm с неправильным токеном - ошибка', async () => {
       const response = await request({
-        method: 'post',
-        url: 'http://localhost:3000/api/confirm',
-        data: {
-          verificationToken: 'randomtoken',
-        },
+        url: `http://localhost:3000/api/confirm/randomtoken`,
       });
 
       expect(response.data, 'с сервера должна вернуться ошибка').to

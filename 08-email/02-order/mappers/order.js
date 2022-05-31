@@ -2,7 +2,7 @@ const mapProduct = require('./product');
 
 module.exports = function mapOrder(order) {
   return {
-    id: order.id,
+    id: order._id,
     user: order.user,
     product: mapProduct(order.product),
     phone: order.phone,
