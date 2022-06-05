@@ -12,8 +12,10 @@ const transportEngine = process.env.NODE_ENV === 'test' ?
   new StubTransport() :
   new SMTPTransport({
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    // port: 465,
+    port: 587,
+    // secure: true,
+    secure: false,
     auth: {
       user: config.mailer.user,
       pass: config.mailer.password,
